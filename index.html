@@ -10902,6 +10902,49 @@ var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/tryaurapeptides.com\/wp-a
         });
       }
     });
+
+    // ======= PRODUCT CARD LINK ROUTING =======
+    // Intercept product image and title clicks → navigate parent to Shopify product page
+    var productLinkMap = {
+      '/product/retatrutide/': '/products/retatrutide',
+      '/product/tirzepatide/': '/products/tirzepatide',
+      '/product/mots-c/': '/products/mots-c',
+      '/product/aod-9604/': '/products/aod-9604',
+      '/product/bpc-157/': '/products/bpc-157',
+      '/product/cagrilintide/': '/products/cagrilintide',
+      '/product/ghk-cu/': '/products/ghk-cu',
+      '/product/glow/': '/products/glow',
+      '/product/cjc-1295-no-dac/': '/products/cjc-1295',
+      '/product/ipamorelin/': '/products/ipamorelin',
+      '/product/selank/': '/products/selank',
+      '/product/semax/': '/products/semax',
+      '/product/epithalon/': '/products/epithalon',
+      '/product/nad/': '/products/nad',
+      '/product/thymosin-alpha-1-ta-1/': '/products/ta-1',
+      '/product/tesamorelin/': '/products/tesamorelin'
+    };
+
+    // Intercept all product links (images, titles) inside the product grid
+    document.querySelectorAll('a[href*="/product/"]').forEach(function(link) {
+      var href = link.getAttribute('href') || '';
+      // Skip add-to-cart buttons (already handled above)
+      if (link.classList.contains('add_to_cart_button')) return;
+
+      var shopifyPath = null;
+      Object.keys(productLinkMap).forEach(function(wcPath) {
+        if (href.indexOf(wcPath) !== -1) {
+          shopifyPath = productLinkMap[wcPath];
+        }
+      });
+
+      if (shopifyPath) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.top.location.href = shopifyPath;
+        });
+      }
+    });
   });
 })();
 </script>
