@@ -7548,11 +7548,7 @@ label[for="payment_method_authorize_net_cim_credit_card"]::after {
 </div>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.cyg-box .woocommerce ul.products li.product a.button:not(.add_to_cart_button)').forEach(function(btn) {
-    btn.textContent = 'Sold Out';
-  });
-});
+/* Removed WooCommerce Sold Out text override - all products active on Shopify */
 </script> </div>
 <div class="elementor-element elementor-element-8baad76 elementor-align-justify elementor-widget__width-initial elementor-mobile-align-justify elementor-widget elementor-widget-button" data-e-type="widget" data-element_type="widget" data-id="8baad76" data-widget_type="button.default">
 <a class="elementor-button elementor-button-link elementor-size-sm" href="/?page_id=391">
@@ -10650,11 +10646,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				} );
 			</script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.cyg-box .add_to_cart_button, .bs-box .add_to_cart_button').forEach(function(btn) {
-            btn.setAttribute('data-quantity', '2');
-        });
-    });
+    /* Removed WooCommerce BOGO quantity override - Shopify handles quantities */
     </script>
 <script>
 		(function () {
@@ -10823,5 +10815,94 @@ var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/tryaurapeptides.com\/wp-a
 			})();
 		</script>
 <script crossorigin="anonymous" data-cf-beacon='{"version":"2024.11.0","token":"24f72375030048d98acbb5edf80cb97b","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' defer="" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" src="assets/js/de44fecf5aa8.js"></script>
+<script>
+/* ======= SHOPIFY ADD TO CART via postMessage ======= */
+(function() {
+  // Map WooCommerce product IDs to product slugs
+  var wpIdToSlug = {
+    '230': 'mots-c',
+    '228': 'aod-9604',
+    '269': 'bpc-157',
+    '259': 'ghk-cu',
+    '232': 'glow',
+    '253': 'cjc-1295',
+    '255': 'ipamorelin',
+    '244': 'selank',
+    '242': 'semax',
+    '234': 'epithalon',
+    '236': 'ta-1',
+    '248': 'tirzepatide',
+    '271': 'nad'
+  };
+
+  // Map href paths to product slugs (for sold-out buttons without data-product_id)
+  var hrefToSlug = {
+    '/product/retatrutide/': 'retatrutide',
+    '/product/cagrilintide/': 'cagrilintide',
+    '/product/tesamorelin/': 'tesamorelin',
+    '/product/tirzepatide/': 'tirzepatide',
+    '/product/nad/': 'nad'
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Process ALL add_to_cart_button elements
+    document.querySelectorAll('.add_to_cart_button').forEach(function(btn) {
+      var slug = null;
+
+      // Try WooCommerce product ID first
+      var wpId = btn.getAttribute('data-product_id');
+      if (wpId && wpIdToSlug[wpId]) {
+        slug = wpIdToSlug[wpId];
+      }
+
+      // Fall back to href path matching
+      if (!slug) {
+        var href = btn.getAttribute('href') || '';
+        Object.keys(hrefToSlug).forEach(function(path) {
+          if (href.indexOf(path) !== -1) {
+            slug = hrefToSlug[path];
+          }
+        });
+      }
+
+      if (slug) {
+        btn.setAttribute('data-product', slug);
+
+        // Convert SOLD OUT buttons to Add to Cart
+        if (btn.classList.contains('aura-sold-out')) {
+          btn.classList.remove('aura-sold-out');
+          btn.classList.add('ajax_add_to_cart');
+          btn.removeAttribute('tabindex');
+          btn.innerHTML = 'Add to cart<span class="kadence-svg-iconset svg-baseline"><svg aria-hidden="true" class="kadence-svg-icon kadence-arrow-right-alt-svg" fill="currentColor" height="28" version="1.1" viewbox="0 0 27 28" width="27" xmlns="http://www.w3.org/2000/svg"><title>Continue</title><path d="M27 13.953c0 0.141-0.063 0.281-0.156 0.375l-6 5.531c-0.156 0.141-0.359 0.172-0.547 0.094-0.172-0.078-0.297-0.25-0.297-0.453v-3.5h-19.5c-0.281 0-0.5-0.219-0.5-0.5v-3c0-0.281 0.219-0.5 0.5-0.5h19.5v-3.5c0-0.203 0.109-0.375 0.297-0.453s0.391-0.047 0.547 0.078l6 5.469c0.094 0.094 0.156 0.219 0.156 0.359v0z"></path></svg></span>';
+        }
+
+        // Convert "Select options" buttons to "Add to cart"
+        if (btn.classList.contains('product_type_variable')) {
+          btn.classList.remove('product_type_variable');
+          btn.classList.add('product_type_simple', 'ajax_add_to_cart');
+          // Update button text but keep SVG icons
+          var firstText = btn.childNodes[0];
+          if (firstText && firstText.nodeType === 3) {
+            firstText.textContent = 'Add to cart';
+          }
+          // Update aria-label
+          var ariaLabel = btn.getAttribute('aria-label') || '';
+          btn.setAttribute('aria-label', ariaLabel.replace('Select options for', 'Add to cart:'));
+        }
+
+        // Intercept click
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var product = this.getAttribute('data-product');
+          if (product) {
+            window.parent.postMessage({ type: 'addToCart', product: product }, '*');
+          }
+        });
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
