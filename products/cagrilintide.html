@@ -3128,6 +3128,291 @@ label[for="payment_method_authorize_net_cim_credit_card"]::after {
 				<div class="elementor-element elementor-element-b186635 elementor-widget__width-inherit e-add-to-cart--show-quantity-yes elementor-widget elementor-widget-woocommerce-product-add-to-cart" data-id="b186635" data-element_type="widget" data-e-type="widget" data-widget_type="woocommerce-product-add-to-cart.default">
 					
 		<div class="elementor-add-to-cart elementor-product-simple">
+			<p class="stock in-stock">In stock</p>
+
+    <style>
+      .bas-wrap {
+        font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+        margin: 20px 0 10px;
+        max-width: 500px;
+      }
+      .bas-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+      .bas-header-line { flex: 1; height: 1px; border-top: 1px solid #ccc; }
+      .bas-header-text { font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #111; white-space: nowrap; }
+      .bas-timer-row { text-align: center; background: #f5f5f5; border-radius: 8px; padding: 10px; font-size: 13px; color: #333; margin-bottom: 12px; }
+      .bas-timer-row strong { font-variant-numeric: tabular-nums; }
+      .bas-option {
+        border: 2px solid #e5e5e5;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 8px;
+        cursor: pointer;
+        transition: border-color .15s, box-shadow .15s;
+        position: relative;
+      }
+      .bas-option:hover { border-color: #ccc; }
+      .bas-option.active { border-color: #111; box-shadow: 0 0 0 1px #111; }
+      .bas-option.bas-popular { margin-top: 14px; margin-bottom: 14px; }
+      .bas-option-top { display: flex; align-items: center; justify-content: space-between; }
+      .bas-option-left { display: flex; align-items: center; }
+      .bas-radio {
+        width: 22px; height: 22px; border: 2px solid #ccc; border-radius: 50%;
+        margin-right: 14px; flex-shrink: 0; position: relative; background: #fff;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .bas-option.active .bas-radio { border-color: #111; }
+      .bas-option.active .bas-radio::after {
+        content: ''; width: 10px; height: 10px; background: #111; border-radius: 50%;
+      }
+      .bas-option-label { font-size: 17px; font-weight: 700; color: #111; }
+      .bas-option-prices { text-align: right; flex-shrink: 0; }
+      .bas-option-price { font-size: 20px; font-weight: 700; color: #111; }
+      .bas-option-compare { font-size: 14px; color: #999; text-decoration: line-through; margin-top: 2px; }
+      .bas-badge {
+        position: absolute; top: -13px; right: 16px; background: #111; color: #fff;
+        font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 5px;
+        letter-spacing: 0.5px; text-transform: uppercase;
+      }
+      .bas-variants-area {
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.3s ease, padding-top 0.3s ease, margin-top 0.3s ease;
+        padding-top: 0; margin-top: 0; border-top: 1px solid transparent;
+      }
+      .bas-option.active .bas-variants-area {
+        max-height: 500px; padding-top: 14px; margin-top: 14px; border-top-color: #f0f0f0;
+      }
+      .bas-variants-label {
+        font-size: 12px; font-weight: 600; color: #888; margin-bottom: 10px;
+        text-transform: uppercase; letter-spacing: 0.5px;
+      }
+      .bas-vial-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+      .bas-vial-row:last-child { margin-bottom: 0; }
+      .bas-vial-num { font-size: 14px; font-weight: 700; color: #111; width: 24px; flex-shrink: 0; }
+      .bas-vial-select {
+        padding: 10px 36px 10px 14px; border: 1.5px solid #ddd; border-radius: 8px;
+        font-size: 14px; font-weight: 600; color: #111; background: #fff; cursor: pointer;
+        font-family: inherit; appearance: none; -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat; background-position: right 12px center; min-width: 120px;
+      }
+      .bas-vial-select:focus { border-color: #111; outline: none; }
+      .bas-atc-btn {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        width: 100%; padding: 16px; background: #0076FF; color: #fff; border: none;
+        border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer;
+        margin-top: 16px; text-align: center; transition: background .15s; font-family: inherit;
+      }
+      .bas-atc-btn:hover { background: #111; }
+      .bas-atc-btn svg { flex-shrink: 0; }
+      .bas-atc-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+      .bas-delivery { font-size: 13px; color: #555; margin-top: 14px; }
+      .bas-delivery strong { color: #111; }
+      .bas-timeline {
+        display: flex; align-items: center; margin-top: 14px;
+        border: 1px solid #e5e5e5; border-radius: 10px; padding: 16px 20px; background: #fafafa;
+      }
+      .bas-timeline-step { display: flex; flex-direction: column; align-items: center; text-align: center; flex-shrink: 0; }
+      .bas-timeline-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+      .bas-timeline-icon svg { width: 20px; height: 20px; color: #111; }
+      .bas-timeline-label { font-size: 11px; font-weight: 700; color: #111; margin-top: 4px; white-space: nowrap; }
+      .bas-timeline-date { font-size: 10px; color: #888; margin-top: 1px; white-space: nowrap; }
+      .bas-timeline-connector { flex: 1; display: flex; align-items: center; margin: 0 6px; padding-bottom: 28px; }
+      .bas-timeline-connector-dot { width: 6px; height: 6px; background: #111; border-radius: 50%; flex-shrink: 0; }
+      .bas-timeline-connector-line { flex: 1; height: 2.5px; background: #111; }
+      @media (max-width: 480px) {
+        .bas-wrap { max-width: 100%; }
+        .bas-option { padding: 14px 14px; }
+        .bas-option-label { font-size: 14px; }
+        .bas-option-price { font-size: 17px; }
+        .bas-option-compare { font-size: 12px; }
+        .bas-radio { width: 18px; height: 18px; margin-right: 10px; }
+        .bas-option.active .bas-radio::after { width: 8px; height: 8px; }
+        .bas-atc-btn { padding: 14px; font-size: 15px; }
+        .bas-timeline { padding: 14px 14px; }
+        .bas-vial-select { min-width: 100px; }
+      }
+    </style>
+
+    <div class="bas-wrap">
+      <div class="bas-header">
+        <span class="bas-header-line"></span>
+        <span class="bas-header-text">Bundle &amp; Save</span>
+        <span class="bas-header-line"></span>
+      </div>
+      <div class="bas-timer-row">Buy 1 Get 1 Free ends in <strong id="bas-timer">03:00:00</strong></div>
+
+            <div class="bas-option" data-pay="1" data-get="2" data-tier-label="Buy 1 Get 1 Free">
+                <div class="bas-option-top">
+          <div class="bas-option-left">
+            <div class="bas-radio"></div>
+            <span class="bas-option-label">Buy 1 Get 1 Free</span>
+          </div>
+          <div class="bas-option-prices">
+            <div class="bas-option-price">$89.00</div>
+                          <div class="bas-option-compare">$178.00</div>
+                      </div>
+        </div>
+              </div>
+            <div class="bas-option active bas-popular" data-pay="2" data-get="3" data-tier-label="Buy 2 Get 1 Free">
+                  <span class="bas-badge">Most Popular</span>
+                <div class="bas-option-top">
+          <div class="bas-option-left">
+            <div class="bas-radio"></div>
+            <span class="bas-option-label">Buy 2 Get 1 Free</span>
+          </div>
+          <div class="bas-option-prices">
+            <div class="bas-option-price">$178.00</div>
+                          <div class="bas-option-compare">$267.00</div>
+                      </div>
+        </div>
+              </div>
+            <div class="bas-option" data-pay="3" data-get="5" data-tier-label="Buy 3 Get 2 Free">
+                <div class="bas-option-top">
+          <div class="bas-option-left">
+            <div class="bas-radio"></div>
+            <span class="bas-option-label">Buy 3 Get 2 Free</span>
+          </div>
+          <div class="bas-option-prices">
+            <div class="bas-option-price">$267.00</div>
+                          <div class="bas-option-compare">$445.00</div>
+                      </div>
+        </div>
+              </div>
+
+      <button type="button" class="bas-atc-btn" id="bas-add-to-cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span>Add to Cart</span>
+      </button>
+
+      <div class="bas-delivery">Orders placed today are expected to arrive <strong>Apr 4 – Apr 6</strong>.</div>
+
+      <div class="bas-timeline">
+        <div class="bas-timeline-step">
+          <div class="bas-timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/>
+            </svg>
+          </div>
+          <div class="bas-timeline-label">Purchased</div>
+          <div class="bas-timeline-date">Apr 2</div>
+        </div>
+        <div class="bas-timeline-connector">
+          <div class="bas-timeline-connector-dot"></div>
+          <div class="bas-timeline-connector-line"></div>
+          <div class="bas-timeline-connector-dot"></div>
+        </div>
+        <div class="bas-timeline-step">
+          <div class="bas-timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <div class="bas-timeline-label">Processing</div>
+          <div class="bas-timeline-date">Apr 2 - Apr 3</div>
+        </div>
+        <div class="bas-timeline-connector">
+          <div class="bas-timeline-connector-dot"></div>
+          <div class="bas-timeline-connector-line"></div>
+          <div class="bas-timeline-connector-dot"></div>
+        </div>
+        <div class="bas-timeline-step">
+          <div class="bas-timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="bas-timeline-label">Delivered</div>
+          <div class="bas-timeline-date">Apr 4 - Apr 6</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    (function(){
+      var isVariable = false;
+      var productId = 226;
+      var ajaxUrl = '/wp-admin/admin-ajax.php';
+
+      function resetBtn() {
+        var b = document.getElementById('bas-add-to-cart');
+        if (b) { b.querySelector('span').textContent = 'Add to Cart'; b.disabled = false; }
+      }
+
+      // Tier selection
+      document.querySelectorAll('.bas-option').forEach(function(opt) {
+        opt.addEventListener('click', function(e) {
+          if (e.target.closest('.bas-vial-select')) return;
+          document.querySelectorAll('.bas-option').forEach(function(o) { o.classList.remove('active'); });
+          opt.classList.add('active');
+        });
+      });
+
+      // Recalculate tier prices when vial selects change
+      document.querySelectorAll('.bas-vial-select').forEach(function(sel) {
+        sel.addEventListener('change', function() {
+          recalcTier(this.closest('.bas-option'));
+        });
+      });
+
+      function recalcTier(tierEl) {
+        var pay = parseInt(tierEl.getAttribute('data-pay'));
+        var get = parseInt(tierEl.getAttribute('data-get'));
+        var freeCount = get - pay;
+        var selects = tierEl.querySelectorAll('.bas-vial-select');
+
+        if (!selects.length) {
+          var basePrice = 89;
+          var payTotal = basePrice * pay;
+          var fullTotal = basePrice * get;
+          tierEl.querySelector('.bas-option-price').textContent = '$' + payTotal.toFixed(2);
+          var compareEl = tierEl.querySelector('.bas-option-compare');
+          if (compareEl) compareEl.textContent = '$' + fullTotal.toFixed(2);
+          return;
+        }
+
+        var prices = [];
+        var fullTotal = 0;
+        selects.forEach(function(s) {
+          var price = parseFloat(s.options[s.selectedIndex].getAttribute('data-price'));
+          prices.push(price);
+          fullTotal += price;
+        });
+        prices.sort(function(a, b) { return a - b; });
+        var discount = 0;
+        for (var i = 0; i < freeCount && i < prices.length; i++) {
+          discount += prices[i];
+        }
+        var payTotal = fullTotal - discount;
+        tierEl.querySelector('.bas-option-price').textContent = '$' + payTotal.toFixed(2);
+        var compareEl = tierEl.querySelector('.bas-option-compare');
+        if (compareEl) compareEl.textContent = '$' + fullTotal.toFixed(2);
+      }
+
+      // Initialize prices
+      document.querySelectorAll('.bas-option').forEach(function(t) { recalcTier(t); });
+
+      // Timer
+      function startTimer(){
+        var now = new Date();
+        var ms = (3*60*60*1000) - ((now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds()) * 1000 % (3*60*60*1000));
+        function tick(){
+          if(ms <= 0) ms = 3*60*60*1000;
+          var h = Math.floor(ms/3600000);
+          var m = Math.floor((ms%3600000)/60000);
+          var s = Math.floor((ms%60000)/1000);
+          document.getElementById('bas-timer').textContent = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+          ms -= 1000;
+        }
+        tick(); setInterval(tick, 1000);
+      }
+      startTimer();
+    })();
+    </script>
+
 					</div>
 
 						</div>
