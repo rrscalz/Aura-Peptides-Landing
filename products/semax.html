@@ -7515,15 +7515,23 @@ fbq('track', 'ViewContent', {
 		</script>
 		<script>var rocket_beacon_data = {"ajax_url":"https:\/\/tryaurapeptides.com\/wp-admin\/admin-ajax.php","nonce":"293f67644b","url":"https:\/\/tryaurapeptides.com\/product\/semax","is_mobile":false,"width_threshold":1600,"height_threshold":700,"delay":500,"debug":null,"status":{"atf":true,"lrc":true,"preconnect_external_domain":true},"elements":"img, video, picture, p, main, div, li, svg, section, header, span","lrc_threshold":1800,"preconnect_external_domain_elements":["link","script","iframe"],"preconnect_external_domain_exclusions":["static.cloudflareinsights.com","rel=\"profile\"","rel=\"preconnect\"","rel=\"dns-prefetch\"","rel=\"icon\""]}</script><script data-name="wpr-wpr-beacon" src='https://tryaurapeptides.com/wp-content/plugins/wp-rocket/assets/js/wpr-beacon.min.js' async></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"24f72375030048d98acbb5edf80cb97b","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 
+
+
+
 <script>
 /* ======= SHOPIFY ADD TO CART via postMessage ======= */
 (function() {
   var PRODUCT_SLUG = 'semax';
 
+  function getActiveTier() {
+    var active = document.querySelector('.bas-option.active');
+    if (!active) return '1';
+    return active.getAttribute('data-pay') || '1';
+  }
+
   // Intercept BAS (Build a Stack) Add to Cart button
   var basBtn = document.getElementById('bas-add-to-cart');
   if (basBtn) {
-    // Remove existing click listeners by cloning
     var newBtn = basBtn.cloneNode(true);
     basBtn.parentNode.replaceChild(newBtn, basBtn);
     newBtn.addEventListener('click', function(e) {
@@ -7531,7 +7539,8 @@ fbq('track', 'ViewContent', {
       e.stopPropagation();
       this.querySelector('span').textContent = 'Adding...';
       this.disabled = true;
-      window.parent.postMessage({ type: 'addToCart', product: PRODUCT_SLUG }, '*');
+      var tier = getActiveTier();
+      window.parent.postMessage({ type: 'addToCart', product: PRODUCT_SLUG, tier: tier }, '*');
       var btn = this;
       setTimeout(function() {
         btn.querySelector('span').textContent = '\u2713 Added!';
@@ -7549,7 +7558,8 @@ fbq('track', 'ViewContent', {
     wcBtn.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      window.parent.postMessage({ type: 'addToCart', product: PRODUCT_SLUG }, '*');
+      var tier = getActiveTier();
+      window.parent.postMessage({ type: 'addToCart', product: PRODUCT_SLUG, tier: tier }, '*');
     });
   }
 
@@ -7558,7 +7568,6 @@ fbq('track', 'ViewContent', {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      // Try to determine product from href
       var href = this.getAttribute('href') || '';
       var slug = null;
       var linkMap = {"/product/retatrutide/":"retatrutide","/product/tirzepatide/":"tirzepatide","/product/mots-c/":"mots-c","/product/aod-9604/":"aod-9604","/product/bpc-157/":"bpc-157","/product/cagrilintide/":"cagrilintide","/product/ghk-cu/":"ghk-cu","/product/glow/":"glow","/product/cjc-1295-no-dac/":"cjc-1295","/product/ipamorelin/":"ipamorelin","/product/selank/":"selank","/product/semax/":"semax","/product/epithalon/":"epithalon","/product/nad/":"nad","/product/thymosin-alpha-1-ta-1/":"ta-1","/product/tesamorelin/":"tesamorelin"};
@@ -7566,9 +7575,9 @@ fbq('track', 'ViewContent', {
         if (href.indexOf(path) !== -1) slug = linkMap[path];
       });
       if (slug) {
-        window.parent.postMessage({ type: 'addToCart', product: slug }, '*');
+        window.parent.postMessage({ type: 'addToCart', product: slug, tier: '1' }, '*');
       } else {
-        window.parent.postMessage({ type: 'addToCart', product: PRODUCT_SLUG }, '*');
+        window.parent.postMessage({ type: 'addToCart', product: PRODUCT_SLUG, tier: '1' }, '*');
       }
     });
   });
