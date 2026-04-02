@@ -10941,7 +10941,8 @@ var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/tryaurapeptides.com\/wp-a
         link.addEventListener('click', function(e) {
           e.preventDefault();
           e.stopPropagation();
-          window.top.location.href = shopifyPath;
+          // Use postMessage to navigate parent (cross-origin safe)
+          window.parent.postMessage({ type: 'navigate', url: shopifyPath }, '*');
         });
       }
     });
