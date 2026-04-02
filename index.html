@@ -10818,17 +10818,12 @@ var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/tryaurapeptides.com\/wp-a
 <script crossorigin="anonymous" data-cf-beacon='{"version":"2024.11.0","token":"24f72375030048d98acbb5edf80cb97b","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' defer="" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" src="assets/js/de44fecf5aa8.js"></script>
 <script>
 /* ======= IFRAME AUTO-RESIZE ======= */
-(function() {
-  function reportHeight() {
-    var h = document.documentElement.scrollHeight;
-    window.parent.postMessage({ type: 'resize', height: h }, '*');
-  }
-  window.addEventListener('load', function() {
-    reportHeight();
-    setInterval(reportHeight, 2000);
-  });
-  document.addEventListener('DOMContentLoaded', reportHeight);
-})();
+window.onload = function() {
+  window.parent.postMessage({
+    type: 'setHeight',
+    height: document.body.scrollHeight
+  }, '*');
+};
 
 /* ======= SHOPIFY ADD TO CART via postMessage ======= */
 (function() {
