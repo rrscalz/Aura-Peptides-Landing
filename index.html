@@ -7390,7 +7390,7 @@ label[for="payment_method_authorize_net_cim_credit_card"]::after {
 <div class="woocommerce columns-4"><ul class="products content-wrap product-archive grid-cols grid-ss-col-2 grid-sm-col-3 grid-lg-col-4 woo-archive-action-on-hover woo-archive-btn-text woo-archive-image-hover-none"><li class="entry content-bg loop-entry product type-product post-261 status-publish first instock product_cat-energy-metabolism product_cat-peptides product_tag-most-popular has-post-thumbnail shipping-taxable purchasable product-type-variable">
 <a class="woocommerce-loop-image-link woocommerce-LoopProduct-link woocommerce-loop-product__link" href="/product/retatrutide/"><img alt="Retatrutide" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" decoding="async" height="300" loading="lazy" sizes="(max-width: 300px) 100vw, 300px" src="assets/img/0445edb0948a.png" srcset="assets/img/0445edb0948a.png 300w, assets/img/8533e4c4c003.png 150w, assets/img/c1d82f1b849d.png 768w, assets/img/662f37159459.png 600w, assets/img/8610729ce767.png 100w, assets/img/a15fd5aa3b44.png 1000w" width="300"/></a><div class="product-details content-bg entry-content-wrap"><h2 class="woocommerce-loop-product__title"><a class="woocommerce-LoopProduct-link-title woocommerce-loop-product__title_ink" href="/product/retatrutide/">Retatrutide</a></h2>
 <span class="price"><span aria-hidden="true" class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>59.00</bdi></span> <span aria-hidden="true">–</span> <span aria-hidden="true" class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>239.00</bdi></span><span class="screen-reader-text">Price range: $59.00 through $239.00</span></span>
-<div class="product-action-wrap"><a class="button product_type_simple add_to_cart_button aura-sold-out" href="/product/retatrutide/" tabindex="-1">SOLD OUT</a> <span class="screen-reader-text" id="woocommerce_loop_add_to_cart_link_describedby_261">
+<div class="product-action-wrap"><a aria-label="Select options for &ldquo;Retatrutide&rdquo;" class="button product_type_variable add_to_cart_button" data-product_id="261" data-quantity="1" href="/product/retatrutide/" rel="nofollow">Select options<span class="kadence-svg-iconset svg-baseline"><svg aria-hidden="true" class="kadence-svg-icon kadence-arrow-right-alt-svg" fill="currentColor" height="28" version="1.1" viewbox="0 0 27 28" width="27" xmlns="http://www.w3.org/2000/svg"><title>Continue</title><path d="M27 13.953c0 0.141-0.063 0.281-0.156 0.375l-6 5.531c-0.156 0.141-0.359 0.172-0.547 0.094-0.172-0.078-0.297-0.25-0.297-0.453v-3.5h-19.5c-0.281 0-0.5-0.219-0.5-0.5v-3c0-0.281 0.219-0.5 0.5-0.5h19.5v-3.5c0-0.203 0.109-0.375 0.297-0.453s0.391-0.047 0.547 0.078l6 5.469c0.094 0.094 0.156 0.219 0.156 0.359v0z"></path></svg></span></a> <span class="screen-reader-text" id="woocommerce_loop_add_to_cart_link_describedby_261">
 		This product has multiple variants. The options may be chosen on the product page	</span>
 </div></div></li>
 <li class="entry content-bg loop-entry product type-product post-248 status-publish instock product_cat-best-selling-peptides product_cat-energy-metabolism product_cat-peptides has-post-thumbnail shipping-taxable purchasable product-type-variable">
@@ -10897,7 +10897,13 @@ var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/tryaurapeptides.com\/wp-a
           e.stopPropagation();
           var product = this.getAttribute('data-product');
           if (product) {
-            window.parent.postMessage({ type: 'addToCart', product: product }, '*');
+            // Variable products → navigate to product page instead of add to cart
+            var variableProducts = ['retatrutide'];
+            if (variableProducts.indexOf(product) !== -1) {
+              window.parent.postMessage({ type: 'navigate', url: '/products/' + product }, '*');
+            } else {
+              window.parent.postMessage({ type: 'addToCart', product: product }, '*');
+            }
           }
         });
       }
