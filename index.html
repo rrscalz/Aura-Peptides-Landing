@@ -10209,13 +10209,13 @@ label[for="payment_method_authorize_net_cim_credit_card"]::after {
         setTimeout(function() { spBusy = false; }, 500);
       });
 
-      // Intercept cart icon clicks
+      // Intercept cart icon clicks → navigate to Shopify cart
       document.addEventListener('click', function(e) {
         var toggle = e.target.closest('.elementor-menu-cart__toggle_wrapper, .elementor-menu-cart__toggle_button, .elementor-button--view-cart, .drawer-toggle.cart-toggle');
         if (toggle) {
           e.preventDefault();
           e.stopPropagation();
-          cartAction('action=cd_cart_action&do=refresh', true);
+          window.parent.postMessage({ type: 'navigate', url: '/cart' }, '*');
         }
       }, true);
 

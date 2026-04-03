@@ -6681,14 +6681,14 @@ document.querySelectorAll('.oow-section a.woocommerce-loop-product__link, .oow-s
         if (toggle) {
           e.preventDefault();
           e.stopPropagation();
-          cartAction('action=cd_cart_action&do=refresh', true);
+          window.parent.postMessage({ type: 'navigate', url: '/cart' }, '*');
         }
       }, true);
 
       // Listen for WooCommerce add to cart (AJAX - shop/archive pages)
       if (typeof jQuery !== 'undefined') {
         jQuery(document.body).on('added_to_cart', function() {
-          cartAction('action=cd_cart_action&do=refresh', true);
+          window.parent.postMessage({ type: 'navigate', url: '/cart' }, '*');
         });
         jQuery(document.body).on('wc_fragments_refreshed', function() {
           cartAction('action=cd_cart_action&do=refresh', false);
